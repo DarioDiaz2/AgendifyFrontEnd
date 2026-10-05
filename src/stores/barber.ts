@@ -9,7 +9,7 @@ export const useBarberStore = defineStore('barber', () => {
   const loading = ref(false);
   const error = ref<string | null>(null);
 
-  /** GET api/Barber/All (requiere token: el interceptor de boot/axios lo agrega) */
+  /** GET api/Barber/All  */
   async function fetchAll() {
     loading.value = true;
     error.value = null;
