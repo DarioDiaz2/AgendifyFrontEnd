@@ -12,7 +12,7 @@ declare module 'vue' {
 
 // Los stores importan `api` directamente; `$api` queda disponible en los componentes.
 const api = axios.create({
-  baseURL: 'http://localhost:5087/api',
+  baseURL: '/api',
   headers: { 'Content-Type': 'application/json' },
 });
 

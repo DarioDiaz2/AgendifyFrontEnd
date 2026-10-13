@@ -1,9 +1,9 @@
 {
-  "name": "biblioteca2026",
+  "name": "Agendify",
   "version": "0.0.1",
   "description": "Aplicación para cursada de EDI 3 2026",
-  "productName": "BibliotecaApp",
-  "author": "Luis Osar Gonzalez <gonzalezluisoscar393@gmail.com>",
+  "productName": "Agendify",
+  "author": "Dario Nicolas Diaz <dariodiaz03nicolas@gmail.com>",
   "type": "module",
   "private": true,
   "scripts": {
