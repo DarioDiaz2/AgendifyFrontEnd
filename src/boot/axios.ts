@@ -9,13 +9,10 @@ declare module 'vue' {
   }
 }
 
-// Instancia de axios apuntando a la API de Agendify.
-// baseURL relativa: el navegador llama a /api/... en el mismo origen del front (localhost:9000)
-// y el proxy de quasar.config.ts (devServer.proxy) lo reenvia al back (https://localhost:7073).
-// Asi no hay peticion cross-origin y no hace falta CORS en el back.
+
 // Los stores importan `api` directamente; `$api` queda disponible en los componentes.
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://localhost:5087/api',
   headers: { 'Content-Type': 'application/json' },
 });
 
