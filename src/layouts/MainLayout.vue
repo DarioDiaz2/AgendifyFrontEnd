@@ -114,7 +114,59 @@ const linksList: EssentialLinkProps[] = [
     icon: 'content_cut',
     link: '/barberos'
   }
+  
+
+  ,{
+    title: 'Citas',
+    caption: 'Listado de citas',
+    icon: 'event',
+    link: '/citas'
+  },
+  {
+    title: 'Clientes',
+    caption: 'Listado de clientes',
+    icon: 'people',
+    link: '/clientes'
+  },
+  {
+    title: 'Pagos',
+    caption: 'Listado de pagos',
+    icon: 'payments',
+    link: '/pagos'
+  },
+  {
+    title: 'Productos',
+    caption: 'Listado de productos',
+    icon: 'inventory_2',
+    link: '/productos'
+  },
+  {
+    title: 'Resenas',
+    caption: 'Listado de resenas',
+    icon: 'star',
+    link: '/resenas'
+  },
+  {
+    title: 'Ventas',
+    caption: 'Listado de ventas',
+    icon: 'point_of_sale',
+    link: '/ventas'
+  },
+  {
+    title: 'Detalles de venta',
+    caption: 'Listado de detalles de venta',
+    icon: 'receipt_long',
+    link: '/detalles-venta'
+  },
+  {
+    title: 'Servicios',
+    caption: 'Listado de servicios',
+    icon: 'content_cut',
+    link: '/servicios'
+  },
+
 ];
+
 
 const leftDrawerOpen = ref(false);
 
