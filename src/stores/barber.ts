@@ -11,7 +11,7 @@ export const useBarberStore = defineStore('barber', () => {
   const loading = ref(false);
   const error = ref<string | null>(null);
 
-  /** GET api/Barber/All */
+  
   async function fetchAll() {
     loading.value = true;
     error.value = null;
@@ -32,7 +32,7 @@ export const useBarberStore = defineStore('barber', () => {
     }
   }
 
-  /** GET api/Barber/ById?Id=... Devuelve el barbero o null si no existe. */
+  
   async function fetchById(id: number): Promise<BarberResponseDto | null> {
     loading.value = true;
     try {
@@ -45,7 +45,7 @@ export const useBarberStore = defineStore('barber', () => {
     }
   }
 
-  /** POST api/Barber */
+  
   async function create(barber: BarberRequestDto) {
     loading.value = true;
     try {
@@ -56,7 +56,7 @@ export const useBarberStore = defineStore('barber', () => {
     }
   }
 
-  /** PUT api/Barber?Id=... */
+ 
   async function update(id: number, barber: BarberRequestDto) {
     loading.value = true;
     try {
@@ -67,7 +67,7 @@ export const useBarberStore = defineStore('barber', () => {
     }
   }
 
-  /** DELETE api/Barber?Id=... (se llama borrar porque delete es palabra reservada) */
+  
   async function borrar(id: number) {
     loading.value = true;
     try {
