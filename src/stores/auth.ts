@@ -5,12 +5,12 @@ import { api } from 'boot/axios';
 import type { LoginUserRequestDto } from 'src/models/Auth/LoginUserRequestDto';
 import type { LoginUserResponseDto } from 'src/models/Auth/LoginUserResponseDto';
 
-// Claves con las que se guarda la sesion en localStorage
+
 const TOKEN_KEY = 'token';
 const USER_KEY = 'userName';
 
 export const useAuthStore = defineStore('auth', () => {
-  // Al crear el store se lee lo guardado: asi la sesion sobrevive a un F5
+  
   const token = ref<string | null>(localStorage.getItem(TOKEN_KEY));
   const userName = ref<string | null>(localStorage.getItem(USER_KEY));
   const loading = ref(false);
@@ -18,7 +18,7 @@ export const useAuthStore = defineStore('auth', () => {
 
   const isAuthenticated = computed(() => token.value !== null);
 
-  /** POST api/Auth/login. Devuelve true si el login fue exitoso. */
+  
   async function login(credenciales: LoginUserRequestDto): Promise<boolean> {
     loading.value = true;
     error.value = null;
@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
       localStorage.setItem(USER_KEY, data.userName ?? '');
       return true;
     } catch (e) {
-      // La API responde 400 con { login: false, errores: [...] } si las credenciales son incorrectas
+      
       if (isAxiosError<LoginUserResponseDto>(e) && e.response?.data?.errores?.length) {
         error.value = e.response.data.errores.join(' ');
       } else {
@@ -42,7 +42,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  /** Borra la sesion en memoria y en localStorage. */
+  
   function logout() {
     token.value = null;
     userName.value = null;

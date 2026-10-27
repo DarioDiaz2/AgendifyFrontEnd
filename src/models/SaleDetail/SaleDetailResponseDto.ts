@@ -1,4 +1,4 @@
-// Espejo de Agendify.Application.Dtos.SaleDetail.SaleDetailResponseDto
+
 export interface SaleDetailResponseDto {
   id: number
   saleId: number

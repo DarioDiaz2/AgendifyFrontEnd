@@ -1,4 +1,4 @@
-// Espejo de Agendify.Application.Dtos.Appointment.AppointmentResponseDto
+
 export interface AppointmentResponseDto {
   id: number
   clientName: string | null

@@ -57,14 +57,14 @@ import type { LoginUserRequestDto } from 'src/models/Auth/LoginUserRequestDto';
 const auth = useAuthStore();
 const router = useRouter();
 
-// El formulario completa el mismo DTO que viaja a la API
+
 const credenciales = ref<LoginUserRequestDto>({ email: '', password: '' });
 const verPassword = ref(false);
 
 async function onSubmit() {
   const ok = await auth.login(credenciales.value);
   if (ok) {
-    await router.push('/'); // al home; desde ahi el usuario navega a Barberos
+    await router.push('/'); 
   }
 }
 </script>

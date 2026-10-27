@@ -1,4 +1,4 @@
-// Espejo de Agendify.Application.Dtos.Barber.BarberResponseDto
+
 export interface BarberResponseDto {
   id: number
   fullName: string

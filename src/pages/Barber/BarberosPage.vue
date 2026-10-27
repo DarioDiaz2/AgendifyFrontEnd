@@ -48,12 +48,12 @@
       </q-banner>
     </q-card>
 
-    <!-- Alta y modificacion comparten el mismo formulario -->
+    
     <q-dialog v-model="mostrarFormulario">
       <BarberCreate :edit-id="editId" @close="cerrarFormulario" />
     </q-dialog>
 
-    <!-- La baja siempre se confirma antes de ejecutarse -->
+    
     <q-dialog v-model="confirmandoBaja">
       <q-card>
         <q-card-section class="row items-center">

@@ -1,4 +1,4 @@
-// Espejo de Agendify.Application.Dtos.Review.ReviewResponseDto
+
 export interface ReviewResponseDto {
   id: number
   clientId: number
