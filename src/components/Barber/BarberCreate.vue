@@ -55,21 +55,21 @@ import { useBarberStore } from 'stores/barber';
 import type { BarberRequestDto } from 'src/models/Barber/BarberRequestDto';
 import { notificarError } from 'src/utils/notificar';
 
-// editId null = alta; con numero = modificacion
+
 const props = defineProps<{ editId: number | null }>();
 const emit = defineEmits<{ (e: 'close'): void }>();
 
 const barberStore = useBarberStore();
 const formRef = ref<QForm | null>(null);
 
-// El formulario completa el mismo DTO que viaja a la API
+
 const form = ref<BarberRequestDto>({
   fullName: '',
   specialty: '',
   phone: '',
 });
 
-// Si es modificacion, se traen los datos actuales del barbero
+
 onMounted(async () => {
   if (props.editId) {
     const barber = await barberStore.fetchById(props.editId);

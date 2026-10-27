@@ -1,4 +1,4 @@
-// Espejo de Agendify.Application.Dtos.Client.ClientResponseDto
+
 export interface ClientResponseDto {
   id: number
   fullName: string

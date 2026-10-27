@@ -53,7 +53,7 @@ import type { PaymentRequestDto } from 'src/models/Payment/PaymentRequestDto';
 import { notificarError } from 'src/utils/notificar';
 import { formatFecha } from 'src/utils/formato';
 
-// editId null = alta; con numero = modificacion
+
 const props = defineProps<{ editId: number | null }>();
 const emit = defineEmits<{ (e: 'close'): void }>();
 
@@ -61,13 +61,13 @@ const paymentStore = usePaymentStore();
 const appointmentStore = useAppointmentStore();
 const formRef = ref<QForm | null>(null);
 
-// Mismo DTO que viaja a la API, pero con el select vacio al iniciar
+
 const form = ref<Omit<PaymentRequestDto, 'appointmentId'> & { appointmentId: number | null }>({
   appointmentId: null,
   amount: 0,
 });
 
-// Opciones del select: se arman con la lista de citas (ej: "#3 - Juan Perez - 25/10/2026 15:30")
+
 const citas = computed(() =>
   appointmentStore.appointments.map((a) => ({
     label: `#${a.id} - ${a.clientName ?? 'Sin cliente'} - ${formatFecha(a.date)}`,
@@ -75,7 +75,7 @@ const citas = computed(() =>
   })),
 );
 
-// Se carga la lista de citas y, si es modificacion, los datos actuales del pago
+
 onMounted(async () => {
   await appointmentStore.fetchAll();
   if (props.editId) {

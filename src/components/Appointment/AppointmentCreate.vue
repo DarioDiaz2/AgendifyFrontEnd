@@ -83,7 +83,7 @@ import { useBarberStore } from 'stores/barber';
 import type { AppointmentRequestDto } from 'src/models/Appointment/AppointmentRequestDto';
 import { notificarError } from 'src/utils/notificar';
 
-// editId null = alta; con numero = modificacion
+
 const props = defineProps<{ editId: number | null }>();
 const emit = defineEmits<{ (e: 'close'): void }>();
 
@@ -92,7 +92,7 @@ const clientStore = useClientStore();
 const barberStore = useBarberStore();
 const formRef = ref<QForm | null>(null);
 
-// Mismo DTO que viaja a la API, pero con los selects vacios al iniciar
+
 const form = ref<Omit<AppointmentRequestDto, 'clientId' | 'barberId'> & {
   clientId: number | null
   barberId: number | null
@@ -104,7 +104,7 @@ const form = ref<Omit<AppointmentRequestDto, 'clientId' | 'barberId'> & {
   total: 0,
 });
 
-// Opciones de los selects: se arman con las listas de clientes y barberos
+
 const clientes = computed(() =>
   clientStore.clients.map((c) => ({ label: c.fullName, value: c.id })),
 );
@@ -112,7 +112,7 @@ const barberos = computed(() =>
   barberStore.barbers.map((b) => ({ label: b.fullName, value: b.id })),
 );
 
-// Se cargan las listas y, si es modificacion, los datos actuales de la cita
+
 onMounted(async () => {
   await Promise.all([clientStore.fetchAll(), barberStore.fetchAll()]);
   if (props.editId) {
