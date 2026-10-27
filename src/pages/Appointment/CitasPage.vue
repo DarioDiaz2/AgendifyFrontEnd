@@ -29,7 +29,7 @@
           no-data-label="No hay citas para mostrar"
           loading-label="Cargando citas..."
         >
-         
+          <!-- Columna de acciones: un boton por cada operacion del ABM -->
           <template #body-cell-acciones="props">
             <q-td class="text-right">
               <q-btn dense flat color="primary" icon="edit" @click="abrirEdicion(props.row.id)">
@@ -48,12 +48,12 @@
       </q-banner>
     </q-card>
 
-   
+    <!-- Alta y modificacion comparten el mismo formulario -->
     <q-dialog v-model="mostrarFormulario">
       <AppointmentCreate :edit-id="editId" @close="cerrarFormulario" />
     </q-dialog>
 
-   
+    <!-- La baja siempre se confirma antes de ejecutarse -->
     <q-dialog v-model="confirmandoBaja">
       <q-card>
         <q-card-section class="row items-center">

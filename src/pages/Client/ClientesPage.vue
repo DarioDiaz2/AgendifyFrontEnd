@@ -29,7 +29,7 @@
           no-data-label="No hay clientes para mostrar"
           loading-label="Cargando clientes..."
         >
-         
+          <!-- Columna de acciones: un boton por cada operacion del ABM -->
           <template #body-cell-acciones="props">
             <q-td class="text-right">
               <q-btn dense flat color="primary" icon="edit" @click="abrirEdicion(props.row.id)">
@@ -48,12 +48,12 @@
       </q-banner>
     </q-card>
 
-    <!-- Alta y modificacion comparten el mismo formulario -->
+    
     <q-dialog v-model="mostrarFormulario">
       <ClientCreate :edit-id="editId" @close="cerrarFormulario" />
     </q-dialog>
 
-   
+    
     <q-dialog v-model="confirmandoBaja">
       <q-card>
         <q-card-section class="row items-center">
@@ -73,6 +73,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import type { QTableColumn } from 'quasar';
+import { isAxiosError } from 'axios';
 import { useClientStore } from 'stores/client';
 import type { ClientResponseDto } from 'src/models/Client/ClientResponseDto';
 import ClientCreate from 'src/components/Client/ClientCreate.vue';
@@ -125,8 +126,13 @@ async function eliminar() {
     if (idABorrar.value !== null) {
       await clientStore.borrar(idABorrar.value);
     }
-  } catch {
-    notificarError('No se pudo eliminar el cliente');
+  } catch (e) {
+    
+    if (isAxiosError(e) && e.response?.status === 500) {
+      notificarError('No se puede eliminar: el cliente tiene citas, ventas o resenas asociadas');
+    } else {
+      notificarError('No se pudo eliminar el cliente');
+    }
   } finally {
     confirmandoBaja.value = false;
     recargar();

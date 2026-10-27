@@ -37,7 +37,10 @@
           stack-label
           class="q-mb-sm"
           lazy-rules
-          :rules="[(v: string) => !!v || 'Ingresa la fecha y hora']"
+          :rules="[
+            (v: string) => !!v || 'Ingresa la fecha y hora',
+            (v: string) => fechaValida(v) || 'La fecha no puede ser anterior a la actual',
+          ]"
         />
         <q-input
           v-model="form.notes"
@@ -105,6 +108,17 @@ const form = ref<Omit<AppointmentRequestDto, 'clientId' | 'barberId'> & {
 });
 
 
+const fechaOriginal = ref<string | null>(null);
+
+
+function fechaValida(v: string): boolean {
+  if (!v) return true; // el "obligatorio" ya lo avisa la otra regla
+  if (props.editId && v === fechaOriginal.value) return true;
+
+  return new Date(v).getTime() >= Date.now() - 60_000;
+}
+
+
 const clientes = computed(() =>
   clientStore.clients.map((c) => ({ label: c.fullName, value: c.id })),
 );
@@ -126,6 +140,7 @@ onMounted(async () => {
         notes: cita.notes,
         total: cita.total,
       };
+      fechaOriginal.value = form.value.date;
     }
   }
 });
