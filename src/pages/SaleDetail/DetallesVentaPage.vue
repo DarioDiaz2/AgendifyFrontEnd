@@ -29,7 +29,7 @@
           no-data-label="No hay detalles de venta para mostrar"
           loading-label="Cargando detalles de venta..."
         >
-          <!-- Columna de acciones: un boton por cada operacion del ABM -->
+          
           <template #body-cell-acciones="props">
             <q-td class="text-right">
               <q-btn dense flat color="primary" icon="edit" @click="abrirEdicion(props.row.id)">
@@ -48,12 +48,12 @@
       </q-banner>
     </q-card>
 
-    <!-- Alta y modificacion comparten el mismo formulario -->
+    
     <q-dialog v-model="mostrarFormulario">
       <SaleDetailCreate :edit-id="editId" @close="cerrarFormulario" />
     </q-dialog>
 
-    <!-- La baja siempre se confirma antes de ejecutarse -->
+    
     <q-dialog v-model="confirmandoBaja">
       <q-card>
         <q-card-section class="row items-center">
@@ -89,7 +89,7 @@ const editId = ref<number | null>(null);
 const confirmandoBaja = ref(false);
 const idABorrar = ref<number | null>(null);
 
-// La API devuelve solo el id del producto; el nombre se busca en la lista de productos
+
 function nombreProducto(id: number): string {
   return productStore.products.find((p) => p.id === id)?.name ?? String(id);
 }

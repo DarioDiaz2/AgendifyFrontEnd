@@ -29,7 +29,7 @@
           no-data-label="No hay pagos para mostrar"
           loading-label="Cargando pagos..."
         >
-          <!-- Columna de acciones: un boton por cada operacion del ABM -->
+          
           <template #body-cell-acciones="props">
             <q-td class="text-right">
               <q-btn dense flat color="primary" icon="edit" @click="abrirEdicion(props.row.id)">
@@ -48,12 +48,12 @@
       </q-banner>
     </q-card>
 
-    <!-- Alta y modificacion comparten el mismo formulario -->
+   
     <q-dialog v-model="mostrarFormulario">
       <PaymentCreate :edit-id="editId" @close="cerrarFormulario" />
     </q-dialog>
 
-    <!-- La baja siempre se confirma antes de ejecutarse -->
+    
     <q-dialog v-model="confirmandoBaja">
       <q-card>
         <q-card-section class="row items-center">
@@ -89,7 +89,7 @@ const editId = ref<number | null>(null);
 const confirmandoBaja = ref(false);
 const idABorrar = ref<number | null>(null);
 
-// La API devuelve solo el id de la cita; el detalle se busca en la lista de citas
+
 function descripcionCita(id: number): string {
   const cita = appointmentStore.appointments.find((a) => a.id === id);
   return cita ? `#${cita.id} - ${cita.clientName ?? 'Sin cliente'} - ${formatFecha(cita.date)}` : `#${id}`;

@@ -29,7 +29,7 @@
           no-data-label="No hay resenas para mostrar"
           loading-label="Cargando resenas..."
         >
-          <!-- Columna de acciones: un boton por cada operacion del ABM -->
+          
           <template #body-cell-acciones="props">
             <q-td class="text-right">
               <q-btn dense flat color="primary" icon="edit" @click="abrirEdicion(props.row.id)">
