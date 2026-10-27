@@ -10,7 +10,6 @@ declare module 'vue' {
 }
 
 
-// Los stores importan `api` directamente; `$api` queda disponible en los componentes.
 const api = axios.create({
   baseURL: '/api',
   headers: { 'Content-Type': 'application/json' },
@@ -20,7 +19,7 @@ export default defineBoot(({ app, router }) => {
   app.config.globalProperties.$axios = axios;
   app.config.globalProperties.$api = api;
 
-  // ANTES de cada peticion: si hay sesion, se agrega el token en el header Authorization
+  
   api.interceptors.request.use((config) => {
     const auth = useAuthStore();
     if (auth.token) {
@@ -29,13 +28,13 @@ export default defineBoot(({ app, router }) => {
     return config;
   });
 
-  // DESPUES de cada respuesta: si la API contesta 401, el token no sirve mas (vencido o invalido)
+  
   api.interceptors.response.use(
     (response) => response,
     (error: unknown) => {
       if (isAxiosError(error) && error.response?.status === 401) {
         useAuthStore().logout();
-        void router.push('/login');
+        void router.push('/');
       }
       return Promise.reject(error instanceof Error ? error : new Error(String(error)));
     },

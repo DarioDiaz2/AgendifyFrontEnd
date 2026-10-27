@@ -6,21 +6,20 @@
         <div class="text-h5 q-mt-sm">Agendify</div>
       </q-card-section>
 
-      <!-- Con sesion: saludo y acceso a la grilla. Sin sesion: invitacion a ingresar -->
+      <!-- Con sesion: saludo y acceso a los listados. Sin sesion: invitacion a ingresar -->
       <q-card-section v-if="auth.isAuthenticated">
         <div class="text-subtitle1">Hola, {{ auth.userName }}</div>
         <q-btn
-          label="Ver barberos"
-          icon="content_cut"
+          label="Ver citas"
+          icon="event"
           color="primary"
           class="q-mt-md"
-          to="/barberos"
+          to="/citas"
         />
       </q-card-section>
 
       <q-card-section v-else>
-        <div class="text-subtitle1">Inicia sesion para ver los barberos</div>
-        <q-btn label="Ingresar" icon="login" color="primary" class="q-mt-md" to="/login" />
+        <div class="text-subtitle1">Inicia sesion para ingresar al sistema</div>
       </q-card-section>
     </q-card>
   </q-page>

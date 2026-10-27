@@ -1,8 +1,9 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header elevated :class="{ 'fondo-bloqueado': !auth.isAuthenticated }">
       <q-toolbar>
         <q-btn
+          v-if="auth.isAuthenticated"
           flat
           dense
           round
@@ -15,26 +16,23 @@
           Agendify
         </q-toolbar-title>
 
-        <!-- Con sesion: nombre de usuario y boton para salir. Sin sesion: boton para ingresar -->
         <template v-if="auth.isAuthenticated">
           <q-icon name="person" class="q-mr-xs" />
           <span class="q-mr-md">{{ auth.userName }}</span>
           <q-btn flat dense label="Salir" icon="logout" @click="onLogout" />
         </template>
-        <q-btn v-else flat dense label="Ingresar" icon="login" to="/login" />
       </q-toolbar>
     </q-header>
 
     <q-drawer
+      v-if="auth.isAuthenticated"
       v-model="leftDrawerOpen"
       show-if-above
       bordered
     >
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
+        <q-item-label header>
+          Menu
         </q-item-label>
 
         <EssentialLink
@@ -45,16 +43,27 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container :class="{ 'fondo-bloqueado': !auth.isAuthenticated }">
       <router-view />
     </q-page-container>
+
+    <LoginModal />
   </q-layout>
 </template>
+
+<style scoped>
+.fondo-bloqueado {
+  filter: blur(4px);
+  pointer-events: none;
+  user-select: none;
+}
+</style>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
+import LoginModal from 'components/Auth/LoginModal.vue';
 import { useAuthStore } from 'stores/auth';
 
 const auth = useAuthStore();
@@ -62,111 +71,20 @@ const router = useRouter();
 
 async function onLogout() {
   auth.logout();
-  await router.push('/login');
+  await router.push('/');
 }
 
 const linksList: EssentialLinkProps[] = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  },
-  {
-    title: 'Barberos',
-    caption: 'Listado de barberos',
-    icon: 'content_cut',
-    link: '/barberos'
-  }
-  
-
-  ,{
-    title: 'Citas',
-    caption: 'Listado de citas',
-    icon: 'event',
-    link: '/citas'
-  },
-  {
-    title: 'Clientes',
-    caption: 'Listado de clientes',
-    icon: 'people',
-    link: '/clientes'
-  },
-  {
-    title: 'Pagos',
-    caption: 'Listado de pagos',
-    icon: 'payments',
-    link: '/pagos'
-  },
-  {
-    title: 'Productos',
-    caption: 'Listado de productos',
-    icon: 'inventory_2',
-    link: '/productos'
-  },
-  {
-    title: 'Resenas',
-    caption: 'Listado de resenas',
-    icon: 'star',
-    link: '/resenas'
-  },
-  {
-    title: 'Ventas',
-    caption: 'Listado de ventas',
-    icon: 'point_of_sale',
-    link: '/ventas'
-  },
-  {
-    title: 'Detalles de venta',
-    caption: 'Listado de detalles de venta',
-    icon: 'receipt_long',
-    link: '/detalles-venta'
-  },
-  {
-    title: 'Servicios',
-    caption: 'Listado de servicios',
-    icon: 'content_cut',
-    link: '/servicios'
-  },
-
+  { title: 'Barberos', caption: 'Listado de barberos', icon: 'content_cut', link: '/barberos' },
+  { title: 'Citas', caption: 'Listado de citas', icon: 'event', link: '/citas' },
+  { title: 'Clientes', caption: 'Listado de clientes', icon: 'people', link: '/clientes' },
+  { title: 'Servicios', caption: 'Listado de servicios', icon: 'build', link: '/servicios' },
+  { title: 'Productos', caption: 'Listado de productos', icon: 'inventory_2', link: '/productos' },
+  { title: 'Ventas', caption: 'Listado de ventas', icon: 'point_of_sale', link: '/ventas' },
+  { title: 'Detalles de venta', caption: 'Detalle de cada venta', icon: 'receipt_long', link: '/detalles-venta' },
+  { title: 'Pagos', caption: 'Listado de pagos', icon: 'payments', link: '/pagos' },
+  { title: 'Reseñas', caption: 'Listado de reseñas', icon: 'star', link: '/resenas' },
 ];
-
 
 const leftDrawerOpen = ref(false);
 
